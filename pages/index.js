@@ -8,16 +8,22 @@ function HomePage() {
     const estilosDaHomePage = {
         //backgroundColor: "red" 
     };
-
-    //console.log(config.playlists)
+    const valorDoFiltro = "Angular";
 
     return (
         <>
             <CSSReset />
-            <div style={estilosDaHomePage}>
+            <div style={{
+                display: "flex",
+                flexDirection: "Column",
+                flex: 1
+                //backgroundColor: "red" 
+            }}>
                 <Menu />
                 <Header />
-                <Timeline playlists={config.playlists} />
+                <Timeline searchValue = {valorDoFiltro} playlists={config.playlists}>
+                    Conteúdo
+                </Timeline>
             </div>
         </>
     );
@@ -60,7 +66,7 @@ function Header() {
     )
 }
 
-function Timeline(propriedades) {
+function Timeline({searchValue, ...propriedades}) {
     //console.log("Dentro do componente", propriedades.playlists)
     const playlistNames = Object.keys(propriedades.playlists)
 
@@ -74,7 +80,10 @@ function Timeline(propriedades) {
                     <section>
                         <h2>{playlistName}</h2>
                         <div>
-                            {videos.map((video) => {
+                            {videos.filter((video) => {
+
+                                return video.title.includes(searchValue)
+                            }).map((video) => {
                                 return (
                                     <a href={video.url}>
                                         <img src={video.thumb} />
