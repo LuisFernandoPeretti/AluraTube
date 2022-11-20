@@ -20,18 +20,18 @@ const StyledMenu = styled.header`
       max-width: 127px;
     }
     .text {
-      fill: ${({ theme }) => theme.textColorBase || "#222222"};
+      fill: ${({ theme } ) => theme.textColorBase || "#222222"};
     }
   }
 `;
 
-export default function Menu() {
+export default function Menu({ valorDoFiltro, setValorDaFiltro }) {
   return (
     <StyledMenu>
       <div>
         <Logo />
       </div>
-      <Search />
+      <Search valorDoFiltro={valorDoFiltro} setValorDaFiltro={setValorDaFiltro}/>
     </StyledMenu>
   );
 }
